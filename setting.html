@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html ng-app="settingApp">
+<head>
+    <meta charset="UTF-8">
+    <title>redirect-resource settings</title>
+    <link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="styles/setting.css">
+</head>
+<body ng-controller="settingCtrl">
+	<div class="navbar-inverse navigation navbar-static-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" target="_blank" href="http://www.baidu.com">Redirect source</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <div class="navbar-form navbar-right">
+            <button type="button" class="btn btn-success" ng-click="open()">添加</button>
+          </div>
+        </div>
+      </div>
+    </div>
+	<div class="container">
+    <table class="table" border="0" cellpadding="0" cellspacing="0">
+      <thead>
+        <tr>
+          <th>Enable</th>
+          <th>If Src Equal</th>
+          <th>Location Src</th>
+          <th>Operate</th>
+        </tr>
+      </thead>
+      <tbody id="list-container">
+        <tr class="enable-{{redirection.redirect}}" ng-repeat="redirection in redirections">
+          <td>
+            <a ng-click="changeStatus($index, $event)" class="enable-btn"><span class="glyphicon glyphicon-ok"></span></a>
+          </td>
+          <td class="resource"><p class="address-label">{{redirection.src}}</p>
+            <div class="input-group address-input">
+              <input type="text" class="form-control" ng-model="redirection.src">
+            </div>
+          </td>
+          <td class="resource">
+            <p class="address-label">{{redirection.localSrc}}</p>
+            <div class="input-group address-input">
+              <span class="input-group-addon">file:///</span>
+              <input type="text" class="form-control" ng-model="redirection.localSrc">
+            </div>
+          </td>
+          <td>
+            <button type="button" class="btn btn-success" ng-click="save($index, $event)">Edit</button>&nbsp;<button type="button" class="btn btn-default" ng-click="delete($index,$event)">Delete</button></td>
+        </tr>
+      </tbody>
+    </table>
+	</div>
+  <div class="dialog hide">
+    <form role="form">
+      <button class="close" ng-click="close()">&times;</button>
+      <div class="form-group">
+        <label>If Src Equal</label>
+        <input type="text" name="src" class="form-control" placeholder="Enter url">
+      </div>
+      <div class="form-group">
+        <label>Location url</label>
+        <input type="text" name="localSrc" class="form-control" placeholder="Location url">
+      </div>
+      <div class="btn-group btn-group-justified">
+        <a class="btn btn-success" ng-click="add()" role="button">确定</a>
+        <a class="btn btn-default" ng-click="close()" role="button">取消</a>
+      </div>
+      <!-- <button type="submit" class="btn-block btn btn-success">Submit</button> -->
+    </form>
+  </div>
+  <input type="file" style="display:none;" id="file">
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/zepto.js"></script>
+    <script src="scripts/setting.js"></script>
+</body>
+</html>

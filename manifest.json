@@ -1,0 +1,23 @@
+{
+	"manifest_version": 2,
+	"name": "redirect",
+	"version": "0.1",
+	"description": "重定向资源文件",
+	"icons": {
+		"16": "icon16.png",
+		"48": "icon48.png",
+		"128": "icon128.png"
+	},
+	"browser_action": {
+		"default_icon": "icon48.png",
+		"default_title": "redirect",
+		"default_popup": "popup.html"
+	},
+	"background": {
+		"scripts": ["scripts/background.js"]
+	},
+	"permissions": ["tabs", "storage", "webRequest", "webRequestBlocking", "<all_urls>"],
+	"options_page": "setting.html",
+	"web_accessible_resources": ["setting.html"],
+	"content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'"
+}

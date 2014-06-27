@@ -1,0 +1,12 @@
+a:hover{text-decoration: none;}
+.operate-container{width: 200px;margin: 0 auto;padding: 10px 0;border-bottom: 1px solid #ccc;}
+.filter-txt{width: 150px;height: 28px;padding: 6px 12px;border:1px solid #ccc;border-radius: 4px}
+.filter-txt:focus{border-color:#66afe9;box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(102,175,233,0.6)}
+.edit-btn{height: 28px;margin-left: 6px;background-color:#5bc0de;border:1px solid #46b8da;color: #fff;}
+
+.resource-container{-webkit-padding-start:20px;}
+.resource-container li{list-style: none;}
+.resource-container li dl{margin-bottom: 0;-webkit-margin-after:0;}
+.resource-container dt{font-weight: normal;font-size: 17px;}
+.resource-container dd{text-indent: 1em}
+.resource-container dd .redirect-false{color: #ccc;text-decoration: line-through;}

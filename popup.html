@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html ng-app="popupApp">
+<head>
+	<link rel="stylesheet" type="text/css" href="styles/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="styles/popup.css">
+</head>
+<body style="min-width:250px;" ng-controller="popupCtrl">
+	<div style="background-color:#ccc">
+		<div class="operate-container">
+			<input class="filter-txt" ng-model="key" type="text" placeholder="filter key">
+			<button type="button" class="edit-btn">Edit</button>
+		</div>
+	</div>
+	<div class="main">
+		<ul class="resource-container">
+			<li ng-repeat="redirection in redirections | filter:key">
+				<dl>
+					<dt>{{redirection.name}}</dt>
+					<dd>
+						<a class="redirect-{{redirection.redirect}}" href="#">{{redirection.localSrc}}</a>
+					</dd>
+				</dl>
+			</li>
+		</ul>
+	</div>
+	<script src="scripts/zepto.js"></script>
+	<script src="scripts/angular.min.js"></script>
+	<script src="scripts/popup.js"></script>
+</body>
+</html>
