@@ -7,6 +7,37 @@
 		"redirect": [true|false] //是否重定向
 	}
  */
+var typeMap = {
+    "txt"   : "text/plain",
+    "html"  : "text/html",
+    "css"   : "text/css",
+    "js"    : "text/javascript",
+    "json"  : "text/json",
+    "xml"   : "text/xml",
+    "jpg"   : "image/jpeg",
+    "gif"   : "image/gif",
+    "png"   : "image/png"
+};
+
+function getLocalFile(url) {
+	var xhr = new XMLHttpRequest();
+	xhr.open('get', url, false); //同步获取数据
+	xhr.send(null);
+	var content = xhr.responseText || xhr.responseXML;
+	if (!content) {
+		return false;
+	}
+	var type = url.split('.').pop();
+	// content = encodeURIComponent(
+ //        type === 'js' ?
+ //        content.replace(/[\u0080-\uffff]/g, function($0) {
+ //            var str = $0.charCodeAt(0).toString(16);
+ //            return "\\u" + '00000'.substr(0, 4 - str.length) + str;
+ //        }) : content
+ //    );
+ //    console.log(content);
+	return 'data:' + (typeMap[type] || typeMap.txt) + ';charset=utf-8,' + content;
+};
 var redirections = null;
 chrome.runtime.onInstalled.addListener(function(details) {
 	chrome.storage.sync.get(['redirections'], function(items) {
@@ -33,14 +64,15 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 });
 
 chrome.webRequest.onBeforeRequest.addListener(function(details) {
-	redirections.forEach(function(redirection, index) {
-		
+	for(var i = 0, len = redirections.length; i < len; i++) {
+		var redirection = redirections[i];
 		if (details.url == redirection.src && redirection.redirect) {
 			return {
-				redirectUrl: 'file:///' + redirection.localSrc
+				redirectUrl: getLocalFile('file:///' + redirection.localSrc)
 			};
 		}
-	});
+	}
+	return true;
 }, {
 	urls: ["<all_urls>"]
 }, ["blocking"]);
