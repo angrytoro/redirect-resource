@@ -1,5 +1,9 @@
 'use strict';
 
+/**
+ * [popupApp 插件开发事例，相应的github：git@github.com:angrytoro/redirect-resource.git]
+ * @type {[type]}
+ */
 var popupApp = angular.module('popupApp', []);
 
 popupApp.controller('popupCtrl', ['$scope',
